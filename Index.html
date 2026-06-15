@@ -467,4 +467,15 @@
   }
 
   function closeLightbox(e) {
-    if(e &&
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function prefillForm() {
+  if (!currentWall) return;
+  document.getElementById('fwall').value = currentWall.title;
+  document.getElementById('ftype').value = 'Comprar un fondo de la galería';
+  document.getElementById('fname').focus();
+}
+  
