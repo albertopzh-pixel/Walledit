@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WallCraft — Fondos de Pantalla</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0D0D14;
+      --surface:  #13131F;
+      --border:   #1E1E30;
+      --violet:   #9f015e;
+      --violet2:  #F54927;
+      --cyan:     #f9c929;
+      --white:    #F0F0FA;
+      --muted:    #6B6B8A;
+      --card-r:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 48px;
+      background: rgba(13,13,20,.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 1.6rem; letter-spacing: .04em;
+      background: linear-gradient(135deg, var(--violet2), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    nav ul { list-style: none; display: flex; gap: 36px; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .9rem; letter-spacing: .04em; transition: color .2s; }
+    nav a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--violet); color: var(--white) !important;
+      padding: 8px 20px; border-radius: 6px; font-weight: 500;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--violet2) !important; }
+
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 120px 48px 80px;
+      text-align: center;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 20%, rgba(124,58,237,.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 30% at 80% 70%, rgba(6,182,212,.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--violet);
+      color: var(--violet2); font-size: .75rem; letter-spacing: .12em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: .95; letter-spacing: -.01em;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--violet2), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 520px; margin: 0 auto 40px;
+      color: var(--muted); font-size: 1.05rem; line-height: 1.6;
+    }
+    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--violet), var(--violet2));
+      color: #fff; border: none; padding: 14px 32px;
+      border-radius: 8px; font-size: .95rem; font-weight: 500;
+      cursor: pointer; transition: opacity .2s, transform .15s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1px solid var(--border); padding: 14px 32px;
+      border-radius: 8px; font-size: .95rem;
+      cursor: pointer; transition: border-color .2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--violet); }
+
+    .stats {
+      display: flex; justify-content: center; gap: 60px;
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; }
+    .stat-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--violet2), var(--cyan));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { color: var(--muted); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+
+    #galeria { padding: 72px 48px; }
+    .section-header { margin-bottom: 40px; }
+    .section-header h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 2.2rem; margin-bottom: 8px;
+    }
+    .section-header p { color: var(--muted); font-size: .95rem; }
+
+    .filters {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--muted); padding: 8px 18px; border-radius: 20px;
+      font-size: .85rem; cursor: pointer; transition: all .2s;
+      font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--violet); border-color: var(--violet);
+      color: #fff;
+    }
+
+    .gallery-grid {
+      columns: 3 320px; column-gap: 16px;
+    }
+    .card {
+      break-inside: avoid; margin-bottom: 16px;
+      position: relative; border-radius: var(--card-r);
+      overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(124,58,237,.25); }
+    .card img {
+      display: block; width: 100%; height: auto;
+      object-fit: cover; transition: transform .4s;
+    }
+    .card:hover img { transform: scale(1.04); }
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,20,.85) 0%, transparent 50%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 20px;
+    }
+    .card:hover .card-overlay { opacity: 1; }
+    .card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; font-weight: 600; margin-bottom: 6px;
+    }
+    .card-meta { display: flex; justify-content: space-between; align-items: center; }
+    .card-tag {
+      background: rgba(124,58,237,.5); border: 1px solid var(--violet);
+      color: var(--violet2); font-size: .72rem; padding: 2px 10px;
+      border-radius: 12px; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .card-price {
+      font-weight: 500; color: var(--cyan); font-size: .95rem;
+    }
+
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,.92);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lb-inner {
+      position: relative;
+      max-width: 900px; width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transform: scale(.94);
+      transition: transform .3s;
+    }
+    .lightbox.open .lb-inner { transform: scale(1); }
+    .lb-image-wrap { position: relative; background: #000; }
+    .lb-image-wrap img { width: 100%; max-height: 60vh; object-fit: contain; display: block; }
+    .lb-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,.6); border: 1px solid var(--border);
+      color: var(--white); border-radius: 50%; font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lb-close:hover { background: var(--violet); }
+    .lb-info {
+      padding: 24px 28px; display: flex;
+      justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .lb-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; }
+    .lb-desc { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+    .lb-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .lb-price {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--cyan);
+    }
+
+    #contacto {
+      padding: 72px 48px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; max-width: 900px; margin: 0 auto;
+      align-items: center;
+    }
+    .contact-info h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.4rem; font-weight: 700; margin-bottom: 16px;
+    }
+    .contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .contact-channels { display: flex; flex-direction: column; gap: 12px; }
+    .channel {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--muted); font-size: .9rem;
+    }
+    .channel-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--border); display: flex; align-items: center;
+      justify-content: center; font-size: 1rem; flex-shrink: 0;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--white); border-radius: 8px;
+      padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: .9rem;
+      transition: border-color .2s; outline: none; width: 100%;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus { border-color: var(--violet); }
+    .contact-form textarea { resize: vertical; min-height: 110px; }
+    .contact-form select option { background: var(--bg); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .submit-btn {
+      background: linear-gradient(135deg, var(--violet), var(--violet2));
+      color: #fff; border: none; padding: 14px;
+      border-radius: 8px; font-size: .95rem; font-weight: 500;
+      cursor: pointer; transition: opacity .2s;
+    }
+    .submit-btn:hover { opacity: .88; }
+    .form-success {
+      display: none; background: rgba(6,182,212,.1);
+      border: 1px solid var(--cyan); color: var(--cyan);
+      padding: 14px; border-radius: 8px; text-align: center; font-size: .9rem;
+    }
+
+    footer {
+      padding: 32px 48px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      color: var(--muted); font-size: .82rem; flex-wrap: wrap; gap: 12px;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      nav ul { display: none; }
+      .hero { padding: 80px 20px 60px; }
+      .stats { gap: 30px; padding: 24px 20px; }
+      #galeria, #contacto { padding: 48px 20px; }
+      .gallery-grid { columns: 1 260px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">WallEdits</div>
+  <ul>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#contacto" class="nav-cta">Hacer pedido</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">✦ Arte digital exclusivo</div>
+  <h1>Fondos que<br><span>transforman</span><br>tu pantalla</h1>
+  <p>Cada fondo es una pieza creada a mano. Disponibles en resoluciones 4K para escritorio, móvil y tablet.</p>
+  <div class="hero-actions">
+    <a href="#galeria" class="btn-primary">hace tu pedido</a> <!-- ARREGLADO -->
+    <a href="#contacto" class="btn-outline">Pedir diseño personalizado</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat-item"><div class="stat-number">120+</div><div class="stat-label">Diseños disponibles</div></div>
+  <div class="stat-item"><div class="stat-number">4K</div><div class="stat-label">Resolución máxima</div></div>
+  <div class="stat-item"><div class="stat-number">48h</div><div class="stat-label">Entrega digital</div></div>
+  <div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">Originales</div></div>
+</div>
+
+<section id="galeria">
+  <div class="section-header">
+    <h2>Galería de fondos</h2>
+    <p>Haz clic en cualquier fondo para ver detalles y hacer tu pedido.</p>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="abstracto">Abstracto</button>
+    <button class="filter-btn" data-filter="naturaleza">Naturaleza</button>
+    <button class="filter-btn" data-filter="espacial">Espacial</button>
+    <button class="filter-btn" data-filter="minimalista">Minimalista</button>
+    <button class="filter-btn" data-filter="oscuro">Oscuro</button>
+  </div>
+  <div class="gallery-grid" id="gallery"></div>
+</section>
+
+<section id="contacto">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>¿Te interesa<br>alguno?</h2>
+      <p>Escríbeme con el nombre del fondo o cuéntame tu idea para un diseño personalizado. Respondo en menos de 24 horas.</p>
+      <div class="contact-channels">
+        <div class="channel"><div class="channel-icon">📧</div><span>albertopzh@gmail.com</span></div>
+        <div class="channel"><div class="channel-icon">📱</div><span>WhatsApp / Telegram: +541136269907</span></div>
+        <div class="channel"><div class="channel-icon">🌐</div><span>Instagram: @lpzh.edits</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="contact-form" id="contactForm">
+        <div class="form-row">
+          <input type="text" id="fname" placeholder="Tu nombre" />
+          <input type="email" id="femail" placeholder="Tu correo" />
+        </div>
+        <select id="ftype">
+          <option value="" disabled selected>¿Qué necesitas?</option>
+          <option>Comprar un fondo de la galería</option>
+          <option>Diseño personalizado</option>
+          <option>Pack de fondos</option>
+          <option>Licencia comercial</option>
+          <option>Otro</option>
+        </select>
+        <input type="text" id="fwall" placeholder="¿Qué fondo te interesa? (nombre o descripción)" />
+        <textarea id="fmsg" placeholder="Cuéntame más detalles: resolución, colores, uso..."></textarea>
+        <button class="submit-btn" onclick="sendForm()">Enviar pedido →</button>
+        <div class="form-success" id="formSuccess">✅ ¡Mensaje enviado! Te responderé pronto.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="font-size:1.2rem;">WallEdits</div>
+  <span>© 2026 — Arte digital. Todos los derechos reservados.</span>
+  <span>Hecho con ✦ pasión</span>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lb-inner" id="lbInner">
+    <div class="lb-image-wrap">
+      <img id="lbImg" src="" alt="" />
+      <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="lb-info">
+      <div>
+        <div class="lb-title" id="lbTitle"></div>
+        <div class="lb-desc" id="lbDesc"></div>
+      </div>
+      <div class="lb-actions">
+        <div class="lb-price" id="lbPrice"></div>
+        <a href="#contacto" class="btn-primary" onclick="closeLightbox(); prefillForm()">Pedir este</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const walls = [
+    { id:1,  title:"Aurora Violeta",      cat:"abstracto",   price:"$5",  desc:"Gradientes suaves en tonos violeta y rosa. 4K · PNG",      img:"https://picsum.photos/seed/v1/600/900",  h:900 },
+    { id:2,  title:"Nebulosa Profunda",   cat:"espacial",    price:"$7",  desc:"Nebulosa generada digitalmente con detalles estelares.",    img:"https://picsum.photos/seed/sp2/600/400",  h:400 },
+    { id:3,  title:"Bosque Nórdico",      cat:"naturaleza",  price:"$5",  desc:"Niebla entre pinos con luz de amanecer.",                  img:"https://picsum.photos/seed/n3/600/750",   h:750 },
+    { id:4,  title:"Líneas Zero",         cat:"minimalista", price:"$4",  desc:"Composición minimalista en blanco y negro.",               img:"https://picsum.photos/seed/m4/600/500",   h:500 },
+    { id:5,  title:"Volcán Oscuro",       cat:"oscuro",      price:"$6",  desc:"Lava y humo en tonos carmesí y carbón.",                  img:"https://picsum.photos/seed/o5/600/850",   h:850 },
+    { id:6,  title:"Ondas Cyan",          cat:"abstracto",   price:"$5",  desc:"Flujo de ondas digitales en cyan y azul eléctrico.",      img:"https://picsum.photos/seed/a6/600/600",   h:600 },
+    { id:7,  title:"Montaña Helada",      cat:"naturaleza",  price:"$5",  desc:"Pico nevado al atardecer en tonos dorados.",              img:"https://picsum.photos/seed/n7/600/450",   h:450 },
+    { id:8,  title:"Cosmos Eterno",       cat:"espacial",    price:"$8",  desc:"Vista del universo profundo con galaxias en espiral.",    img:"https://picsum.photos/seed/sp8/600/700",  h:700 },
+    { id:9,  title:"Humo Cromado",        cat:"oscuro",      price:"$6",  desc:"Texturas de humo metálico sobre negro absoluto.",         img:"https://picsum.photos/seed/o9/600/800",   h:800 },
+    { id:10, title:"Punto Blanco",        cat:"minimalista", price:"$4",  desc:"Un punto. Espacio. Silencio visual.",                     img:"https://picsum.photos/seed/m10/600/550",  h:550 },
+    { id:11, title:"Selva Profunda",      cat:"naturaleza",  price:"$5",  desc:"Follaje tropical con luz difusa.",                        img:"https://picsum.photos/seed/n11/600/650",  h:650 },
+    { id:12, title:"Fractal Dorado",      cat:"abstracto",   price:"$7",  desc:"Fractal matemático en tonos dorados y naranja.",          img:"https://picsum.photos/seed/a12/600/820",  h:820 },
+  ];
+
+  let currentWall = null;
+
+  function buildGallery(filter = 'todos') {
+    const grid = document.getElementById('gallery');
+    const filtered = filter === 'todos' ? walls : walls.filter(w => w.cat === filter);
+    grid.innerHTML = filtered.map(w => `
+      <div class="card" data-id="${w.id}" onclick="openLightbox(${w.id})">
+        <img src="${w.img}" alt="${w.title}" loading="lazy" />
+        <div class="card-overlay">
+          <div class="card-title">${w.title}</div>
+          <div class="card-meta">
+            <span class="card-tag">${w.cat}</span>
+            <span class="card-price">${w.price}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  buildGallery();
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      buildGallery(btn.dataset.filter); // ARREGLADO
+    });
+  });
+
+  function openLightbox(id) {
+    currentWall = walls.find(w => w.id === id);
+    if(!currentWall) return;
+    document.getElementById('lbImg').src = currentWall.img.replace('/600/', '/1200/');
+    document.getElementById('lbTitle').textContent = currentWall.title;
+    document.getElementById('lbDesc').textContent = currentWall.desc;
+    document.getElementById('lbPrice').textContent = currentWall.price;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if(e &&
