@@ -323,7 +323,7 @@
   <h1>Fondos que<br><span>transforman</span><br>tu pantalla</h1>
   <p>Cada fondo es una pieza creada a mano. Disponibles en resoluciones 4K para escritorio, móvil y tablet.</p>
   <div class="hero-actions">
-    <a href="#galeria" class="btn-primary">hace tu pedido</a> <!-- ARREGLADO -->
+    <a href="#galeria" class="btn-primary">haz tu pedido</a>
     <a href="#contacto" class="btn-outline">Pedir diseño personalizado</a>
   </div>
 </section>
@@ -395,7 +395,7 @@
   <div class="lb-inner" id="lbInner">
     <div class="lb-image-wrap">
       <img id="lbImg" src="" alt="" />
-      <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar">✕</button>
+      <button class="lb-close" onclick="closeLightbox(null)" aria-label="Cerrar">✕</button>
     </div>
     <div class="lb-info">
       <div>
@@ -404,7 +404,7 @@
       </div>
       <div class="lb-actions">
         <div class="lb-price" id="lbPrice"></div>
-        <a href="#contacto" class="btn-primary" onclick="closeLightbox(); prefillForm()">Pedir este</a>
+        <a href="#contacto" class="btn-primary" onclick="closeLightbox(null); prefillForm()">Pedir este</a>
       </div>
     </div>
   </div>
@@ -430,6 +430,7 @@
 
   function buildGallery(filter = 'todos') {
     const grid = document.getElementById('gallery');
+    if (!grid) return;
     const filtered = filter === 'todos' ? walls : walls.filter(w => w.cat === filter);
     grid.innerHTML = filtered.map(w => `
       <div class="card" data-id="${w.id}" onclick="openLightbox(${w.id})">
@@ -451,7 +452,7 @@
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      buildGallery(btn.dataset.filter); // ARREGLADO
+      buildGallery(btn.dataset.filter);
     });
   });
 
@@ -467,15 +468,4 @@
   }
 
   function closeLightbox(e) {
-  if (e && e.target !== e.currentTarget) return;
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function prefillForm() {
-  if (!currentWall) return;
-  document.getElementById('fwall').value = currentWall.title;
-  document.getElementById('ftype').value = 'Comprar un fondo de la galería';
-  document.getElementById('fname').focus();
-}
-  
+    if (e && 
